@@ -1,73 +1,102 @@
-# React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Interactive Seat Booking System
 
-Currently, two official plugins are available:
+An advanced web application for interactive seat booking in movie theatres. Users can browse movies, select theatres, view seat layouts, and book seats with real-time updates and confirmation dialogs.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
+- Browse movies and view details
+- Select theatres and showtimes
+- Interactive seat selection grid
+- Real-time seat availability
+- Booking summary and confirmation popup
+- Responsive design for desktop and mobile
+- Error boundaries and loading states
 
-## React Compiler
+## Technologies Used
+- **React** (with Hooks)
+- **Redux Toolkit** (state management)
+- **React Router v6** (routing)
+- **TypeScript**
+- **Vite** (build tool)
+- **Jest** & **React Testing Library** (unit/integration tests)
+- **d3-seating-chart** (seat grid rendering)
+- **CSS Modules** and global styles
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Project Structure
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```
+src/
+  assets/           # Images and static assets
+  components/       # Reusable UI components
+  features/         # Feature modules
+  hooks/            # Custom React hooks
+  pages/            # Main application pages
+  redux/            # Store, slices, reducers
+  styles/           # CSS files
+  theme/            # Theme configuration
+  types/            # TypeScript types
+  utils/            # Utility functions
+  __tests__/        # Test files for pages/components
+public/              # Public assets
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Setup & Installation
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/your-username/interactive-seat-booking-system-flintech.git
+   cd interactive-seat-booking-system-flintech
+   ```
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+
+3. **Start the development server:**
+   ```bash
+   npm run dev
+   ```
+   The app will be available at `http://localhost:5173` (default Vite port).
+
+## Running Tests
+
+Unit and integration tests are written using Jest and React Testing Library.
+
+To run all tests:
+```bash
+npx jest
 ```
+Or with npm script (if defined):
+```bash
+npm test
+```
+
+Tests are located in `src/__tests__/`. Each test file covers a main page or feature, with Redux and Router context provided for accurate simulation.
+
+## How to Use
+
+1. **Browse Movies:**
+   - Home page lists available movies.
+   - Click a movie to view details and available theatres.
+
+2. **Select Theatre & Show:**
+   - Choose a theatre and showtime for your movie.
+
+3. **Book Seats:**
+   - View interactive seat grid.
+   - Select available seats; see price legend and booking summary.
+
+4. **Confirm Booking:**
+   - Review booking summary.
+   - Confirm to finalize booking; see confirmation dialog.
+
+## Development & Contribution
+
+- Follow standard React/Redux best practices.
+- Use TypeScript for type safety.
+- Write tests for new features in `src/__tests__/`.
+- Run `npm run lint` to check code quality (if ESLint is configured).
+- Submit pull requests with clear descriptions.
+
+
