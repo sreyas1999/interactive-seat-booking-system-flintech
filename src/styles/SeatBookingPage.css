@@ -1,0 +1,54 @@
+/* SeatBookingPage specific styles */
+.seat-booking-main {
+  display: flex;
+  justify-content: center;
+}
+.seat-booking-main > div:first-child {
+  max-width: 520px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.seat-legend-responsive {
+  transition: margin 0.2s;
+}
+@media (max-width: 700px) {
+  .seat-booking-main {
+    flex-direction: column !important;
+    align-items: center !important;
+    min-height: 500px !important;
+    overflow-x: auto !important;
+    width: 100vw !important;
+    max-width: 100vw !important;
+  }
+  .seat-booking-main svg {
+    height: 500px !important;
+    min-height: 500px !important;
+    max-height: 500px !important;
+    min-width: 100vw !important;
+    width: auto !important;
+    display: block;
+  }
+  .seat-legend-responsive {
+    margin-left: 0 !important;
+    margin-top: 18px !important;
+    width: 100%;
+    max-width: 320px;
+  }
+}
+@media (max-width: 730px) {
+  .seat-booking-main {
+    flex-direction: column !important;
+    align-items: center !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    width: 100vw !important;
+    max-width: 100vw !important;
+  }
+  .seat-booking-main svg {
+    min-width: 700px !important;
+    width: 700px !important;
+    height: auto !important;
+    display: block;
+  }
+}

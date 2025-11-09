@@ -1,0 +1,118 @@
+/* Center Book Now button inside seat-booking-actions */
+.seat-booking-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 1.5rem;
+}
+/* Center Book Now button */
+.book-now-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  background: #df1f26;
+  color: #fff;
+  font-weight: 600;
+  border-radius: 8px;
+  padding: 0.6rem 2rem;
+  box-shadow: 0 2px 8px rgba(223, 31, 38, 0.08);
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.book-now-btn:hover {
+  background: #b71c1c;
+}
+/* Navbar styles */
+
+/* Enhanced Navbar styles */
+.custom-navbar {
+  background: linear-gradient(90deg, #df1f26 60%, #ffb347 100%);
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  padding: 0.8rem 2vw 1rem 2vw;
+  border-radius: 0;
+  backdrop-filter: blur(6px);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  min-height: 64px;
+  width: 100%;
+}
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  font-size: 1.7rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #fff;
+  transition: transform 0.2s cubic-bezier(0.4, 2, 0.3, 1);
+  border-radius: 16px;
+  padding: 0.2rem 1.2rem 0.2rem 0.6rem;
+  box-shadow: 0 2px 8px rgba(223, 31, 38, 0.08);
+  cursor: pointer;
+}
+.navbar-brand:hover {
+  transform: scale(1.04);
+  background: rgba(255,255,255,0.08);
+}
+.navbar-logo {
+  width: 2.4rem;
+  height: 2.4rem;
+  margin-right: 14px;
+  object-fit: contain;
+  vertical-align: middle;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.14));
+  transition: transform 0.2s cubic-bezier(0.4, 2, 0.3, 1);
+}
+.navbar-title {
+  font-family: "Segoe UI", "Roboto", sans-serif;
+  font-weight: 800;
+  font-size: 1.4rem;
+  background: none;
+  letter-spacing: 1.5px;
+}
+.navbar-profile {
+  display: flex;
+  align-items: center;
+  margin-left: 1.2rem;
+}
+.profile-icon {
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  transition: box-shadow 0.2s;
+}
+.profile-icon:hover {
+  box-shadow: 0 4px 16px rgba(223, 31, 38, 0.18);
+}
+@media (max-width: 600px) {
+  .custom-navbar {
+    padding: 0.6rem 2vw 0.8rem 2vw;
+    min-height: 48px;
+  }
+  .navbar-brand {
+    font-size: 1.1rem;
+    padding: 0.1rem 0.6rem 0.1rem 0.3rem;
+  }
+  .navbar-logo {
+    width: 1.6rem;
+    height: 1.6rem;
+    margin-right: 8px;
+  }
+  .navbar-title {
+    font-size: 1rem;
+  }
+  .navbar-profile {
+    margin-left: 0.6rem;
+  }
+  .profile-icon {
+    width: 1.4rem;
+    height: 1.4rem;
+  }
+}

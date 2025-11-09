@@ -1,0 +1,291 @@
+.seat-booking-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.seat-booking-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.booking-info {
+  margin: 0.5rem 0;
+}
+
+.seat-booking-main {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+/* Seat Grid */
+.seat-grid {
+  width: 100%;
+  overflow-x: auto;
+  padding: 1rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.screen {
+  width: 90%;
+  max-width: 400px;
+  height: 30px;
+  margin: 0 auto 1.5rem;
+  background: #ddd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  font-size: 0.875rem;
+}
+
+.seat-row {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.row-label {
+  min-width: 24px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 0.875rem;
+}
+
+.seats {
+  display: flex;
+  gap: 0.25rem;
+  flex-wrap: nowrap;
+}
+
+/* Seat */
+.seat {
+  width: 32px;
+  height: 32px;
+  font-size: 0.75rem;
+}
+
+/* Price Legend */
+.price-legend {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 1rem;
+  padding: 1rem;
+  background: white;
+  border-radius: 8px;
+  margin: 1rem 0;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+}
+
+/* Booking Summary */
+.booking-summary {
+  width: 100%;
+  background: white;
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.summary-content {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.summary-item {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 0.5rem;
+  padding: 0.5rem 0;
+  font-size: 0.875rem;
+}
+
+/* Responsive Breakpoints */
+@media (min-width: 768px) {
+  .seat-booking-container {
+    padding: 2rem;
+  }
+
+  .seat {
+    width: 40px;
+    height: 40px;
+    font-size: 0.875rem;
+  }
+
+  .seats {
+    gap: 0.5rem;
+  }
+
+  .screen {
+    height: 40px;
+    font-size: 1rem;
+  }
+
+  .summary-item {
+    grid-template-columns: 120px 1fr;
+    font-size: 1rem;
+  }
+
+  .price-legend {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .seat-booking-main {
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+  }
+
+  .booking-summary {
+    padding: 1.5rem;
+  }
+}
+
+/* Theatre Selection */
+.theatre-selector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 32px 0 24px 0;
+  padding: 0;
+  background: transparent;
+  box-shadow: none;
+  border-radius: 0;
+  max-width: 420px;
+}
+
+.theatre-card {
+  padding: 1rem;
+}
+
+.time-slots {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.time-slot-button {
+  font-size: 0.875rem;
+  padding: 0.5rem 0.75rem;
+}
+
+@media (min-width: 768px) {
+  .theatre-selector {
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+
+  .theatre-card {
+    padding: 1.5rem;
+  }
+
+  .time-slots {
+    gap: 0.75rem;
+    margin-top: 1rem;
+  }
+
+  .time-slot-button {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+  }
+}
+
+/* Confirmation Page */
+.confirmation-container {
+  width: 100%;
+  max-width: 600px;
+  margin: 1.5rem auto;
+  padding: 1rem;
+}
+
+.confirmation-content {
+  text-align: center;
+}
+
+.confirmation-details {
+  margin: 1.5rem 0;
+  text-align: left;
+}
+
+@media (min-width: 768px) {
+  .confirmation-container {
+    margin: 3rem auto;
+    padding: 2rem;
+  }
+}
+
+/* Navbar Responsive */
+.navbar {
+  padding: 0.75rem 1rem;
+}
+
+.navbar-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.navbar-brand {
+  font-size: 1.25rem;
+}
+
+.navbar-movie-info {
+  font-size: 0.875rem;
+}
+
+@media (min-width: 768px) {
+  .navbar {
+    padding: 1rem 2rem;
+  }
+
+  .navbar-content {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .navbar-brand {
+    font-size: 1.5rem;
+  }
+
+  .navbar-movie-info {
+    font-size: 1rem;
+  }
+}
+
+/* Common Components */
+.loader-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+}
+
+.error-boundary {
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .seat,
+  .movie-card,
+  .theatre-card,
+  .k-button {
+    transition: none !important;
+  }
+}

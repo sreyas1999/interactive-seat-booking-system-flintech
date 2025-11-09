@@ -1,0 +1,126 @@
+.movie-details-container {
+  min-height: 100vh;
+  background: linear-gradient(120deg, #f5f7fa 0%, #c3cfe2 100%);
+  padding: 32px 0;
+}
+
+.movie-details-header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.back-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--primary-color);
+  padding: 0 8px 0 0;
+  margin-left: 52px;
+}
+
+.back-btn img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+.movie-details-header h1 {
+  margin: 0;
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--secondary-color);
+  letter-spacing: 1px;
+}
+
+.movie-details-content {
+  max-width: 900px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 18px;
+  box-shadow: 0 4px 32px rgba(0, 0, 0, 0.1);
+  padding: 32px 32px 24px 32px;
+}
+
+.movie-backdrop {
+  width: 100%;
+  max-height: 500px;
+  object-fit: cover;
+  border-radius: 14px;
+  margin-bottom: 2.5rem;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.15);
+}
+
+.movie-metadata {
+  background: rgba(245, 247, 250, 0.85);
+  border-radius: 12px;
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.07);
+  padding: 22px 28px;
+  margin: 0 auto 28px auto;
+  max-width: 700px;
+  font-size: 1.08rem;
+  color: #444;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.movie-meta-box {
+  background: linear-gradient(90deg, #f5f7fa 60%, #e2eafc 100%);
+  border: 1px solid #e2eafc;
+  border-radius: 10px;
+  padding: 22px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-start;
+  margin-bottom: 18px;
+}
+
+.movie-meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 28px;
+  align-items: center;
+  width: 100%;
+}
+
+.movie-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 500;
+}
+
+
+.movie-metadata hr {
+  border: none;
+  border-top: 1px solid #e2eafc;
+  margin: 10px 0 16px 0;
+}
+
+.movie-description {
+  margin-top: 18px;
+  font-size: 1.15rem;
+  color: #222;
+  line-height: 1.7;
+  font-weight: 500;
+}
+
+.theatre-selection {
+  margin-top: 32px;
+}
+
+.theatre-selection h2 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin-bottom: 18px;
+}
