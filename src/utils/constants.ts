@@ -34,6 +34,7 @@ export const DUMMY_MOVIES = [
     rating: 8.8,
     releaseDate: "2025-11-16",
     status: "now_showing" as const,
+    language: "English",
   },
   {
     id: 2,
@@ -47,6 +48,7 @@ export const DUMMY_MOVIES = [
     rating: 9.0,
     releaseDate: "2025-11-18",
     status: "now_showing" as const,
+    language: "English",
   },
   {
     id: 3,
@@ -60,6 +62,7 @@ export const DUMMY_MOVIES = [
     backdrop: "/src/assets/movies/backdrops/interstellar_backdrop.jpeg",
     rating: 8.6,
     releaseDate: "2025-11-20",
+    language: "English",
   },
   {
     id: 4,
@@ -73,6 +76,7 @@ export const DUMMY_MOVIES = [
     rating: 8.9,
     releaseDate: "2025-11-12",
     status: "now_showing" as const,
+    language: "English",
   },
   {
     id: 5,
@@ -86,6 +90,7 @@ export const DUMMY_MOVIES = [
     rating: 9.3,
     releaseDate: "2025-11-14",
     status: "now_showing" as const,
+    language: "English",
   },
   {
     id: 6,
@@ -99,6 +104,7 @@ export const DUMMY_MOVIES = [
     rating: 8.8,
     releaseDate: "2025-11-15",
     status: "now_showing" as const,
+    language: "English",
   },
   {
     id: 7,
@@ -112,6 +118,7 @@ export const DUMMY_MOVIES = [
     rating: 8.7,
     releaseDate: "2025-11-13",
     status: "now_showing" as const,
+    language: "English",
   },
   {
     id: 8,
@@ -125,6 +132,7 @@ export const DUMMY_MOVIES = [
     rating: 8.7,
     releaseDate: "2025-11-17",
     status: "now_showing" as const,
+    language: "English",
   },
   {
     id: 9,
@@ -138,6 +146,7 @@ export const DUMMY_MOVIES = [
     rating: 9.2,
     releaseDate: "2025-11-11",
     status: "now_showing" as const,
+    language: "English",
   },
   {
     id: 10,
@@ -151,5 +160,6 @@ export const DUMMY_MOVIES = [
     rating: 8.8,
     releaseDate: "2025-11-10",
     status: "now_showing" as const,
+    language: "English",
   },
 ] as const;
