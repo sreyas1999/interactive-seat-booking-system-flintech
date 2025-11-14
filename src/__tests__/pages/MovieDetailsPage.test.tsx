@@ -10,7 +10,18 @@ describe('MovieDetailsPage', () => {
   let store: ReturnType<typeof mockStore>;
   beforeEach(() => {
     store = mockStore({
-      movies: { movies: [{ id: 1, title: 'Test Movie', genre: 'Action', rating: 4.5, description: 'Test description', backdrop: '/backdrop.png' }] },
+      movies: { 
+        movies: [{ 
+          id: 1, 
+          title: 'Test Movie', 
+          genre: 'Action', 
+          rating: 4.5, 
+          description: 'Test description', 
+          backdrop: '/backdrop.png' 
+        }],
+        loading: false,
+        error: null
+      },
       theatres: { theatres: [], selectedTheatre: null }
     });
   });

@@ -1,15 +1,56 @@
-import { useState, useMemo, useCallback } from "react";
-import { useAppSelector } from "../redux/hooks";
+import { useState, useMemo, useCallback, useEffect } from "react";
+import { useAppSelector, useAppDispatch } from "../redux/hooks";
+import { fetchMovies } from "../redux/slices/movieSlice";
 import MovieCard from "../components/movies/MovieCard";
 import Loader from "../components/common/Loader";
 import "../styles/MovieList.css";
 
+const ERROR_CONTAINER_STYLE = {
+  textAlign: 'center' as const,
+  padding: '60px 20px',
+  color: '#d32f2f'
+};
+
+const RETRY_BUTTON_STYLE = {
+  marginTop: '20px',
+  padding: '12px 24px',
+  background: '#ff6358',
+  color: 'white',
+  border: 'none',
+  borderRadius: '8px',
+  cursor: 'pointer',
+  fontSize: '1rem',
+  fontWeight: '600'
+};
+
+const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes in milliseconds
+const CACHE_KEY = 'movies_last_fetch';
+
 export const MovieListPage = () => {
+  const dispatch = useAppDispatch();
   const movies = useAppSelector((state) => state.movies.movies);
   const loading = useAppSelector((state) => state.movies.loading);
+  const error = useAppSelector((state) => state.movies.error);
   const [activeFilter, setActiveFilter] = useState<
     "now_showing" | "coming_soon"
   >("now_showing");
+
+  // Fetch movies with smart cache invalidation
+  useEffect(() => {
+    const lastFetch = localStorage.getItem(CACHE_KEY);
+    const now = Date.now();
+    
+    const shouldFetch = 
+      movies.length === 0 || 
+      !lastFetch || 
+      now - parseInt(lastFetch) > CACHE_DURATION;
+
+    if (shouldFetch && !loading && !error) {
+      dispatch(fetchMovies()).then(() => {
+        localStorage.setItem(CACHE_KEY, now.toString());
+      });
+    }
+  }, [dispatch, movies.length, loading, error]);
 
   const nowShowingMovies = useMemo(
     () => movies.filter((movie) => movie.status === "now_showing"),
@@ -32,6 +73,25 @@ export const MovieListPage = () => {
 
   if (loading) {
     return <Loader />;
+  }
+
+  if (error) {
+    return (
+      <div className="movie-list-page">
+        <div className="container">
+          <div style={ERROR_CONTAINER_STYLE}>
+            <h2>Failed to load movies</h2>
+            <p>{error}</p>
+            <button
+              onClick={() => dispatch(fetchMovies())}
+              style={RETRY_BUTTON_STYLE}
+            >
+              Retry
+            </button>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   return (

@@ -5,9 +5,9 @@
   position: relative;
   overflow-x: auto;
   max-width: 1080px;
-  min-height: 420px; /* Reduced since stage is now separate */
+  min-height: 420px; 
   flex-direction: row;
-  gap: 20px; /* Added gap between components */
+  gap: 20px;
   align-items: flex-start;
   padding: 8px 0;
   margin: 0 auto;

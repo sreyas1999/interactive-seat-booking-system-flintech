@@ -20,7 +20,9 @@ describe('SeatBookingPage', () => {
     store = mockStore({
       movies: {
         movies: [{ id: 1, title: 'Test Movie', backdrop: '', duration: '120 min', genre: 'Action', releaseDate: '2025-01-01', rating: 4.5, description: 'Test description' }],
-        selectedMovie: { id: 1, title: 'Test Movie', backdrop: '', duration: '120 min', genre: 'Action', releaseDate: '2025-01-01', rating: 4.5, description: 'Test description' }
+        selectedMovie: { id: 1, title: 'Test Movie', backdrop: '', duration: '120 min', genre: 'Action', releaseDate: '2025-01-01', rating: 4.5, description: 'Test description' },
+        loading: false,
+        error: null
       },
       theatres: {
         theatres: [{ id: 1, name: 'Test Theatre', seatLayout: { rows: [{ seats: [{ id: 'A1', tier: 'SILVER', isBooked: false, price: 100 }] }] } }],

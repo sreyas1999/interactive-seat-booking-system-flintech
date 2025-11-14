@@ -17,7 +17,6 @@ const PriceLegend = () => {
         <div className="seat-sample platinum"></div>
         <span>Platinum - ₹{SEAT_PRICES.PLATINUM}</span>
       </div>
-      {/* Styles moved to CSS file: src/styles/PriceLegend.css */}
     </div>
   );
 };
