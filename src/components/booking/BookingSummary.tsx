@@ -1,5 +1,5 @@
-import { useSelector } from 'react-redux';
-import type { RootState } from '../../redux/store';
+import React, { useMemo } from 'react';
+import { useAppSelector } from '../../redux/hooks';
 import { Card, CardHeader, CardBody } from '@progress/kendo-react-layout';
 import { Button } from '@progress/kendo-react-buttons';
 import { calculateTotalPrice } from '../../utils/seatUtils';
@@ -9,11 +9,18 @@ interface BookingSummaryProps {
 }
 
 const BookingSummary = ({ onConfirm }: BookingSummaryProps) => {
-  const selectedSeats = useSelector((state: RootState) => state.booking.selectedSeats);
-  const selectedMovie = useSelector((state: RootState) => state.movies.selectedMovie);
-  const selectedTheatre = useSelector((state: RootState) => state.theatres.selectedTheatre);
+  const selectedSeats = useAppSelector((state) => state.booking.selectedSeats);
+  const selectedMovie = useAppSelector((state) => state.movies.selectedMovie);
+  const selectedTheatre = useAppSelector((state) => state.theatres.selectedTheatre);
 
-  const totalPrice = calculateTotalPrice(selectedSeats);
+  const totalPrice = useMemo(() => calculateTotalPrice(selectedSeats), [selectedSeats]);
+  
+  const seatIds = useMemo(
+    () => selectedSeats.map((seat) => seat.id).join(', '),
+    [selectedSeats]
+  );
+
+  const isDisabled = useMemo(() => selectedSeats.length === 0, [selectedSeats.length]);
 
   if (!selectedMovie || !selectedTheatre) {
     return null;
@@ -32,8 +39,7 @@ const BookingSummary = ({ onConfirm }: BookingSummaryProps) => {
           <strong>Theatre:</strong> {selectedTheatre.name}
         </div>
         <div className="summary-item">
-          <strong>Selected Seats:</strong>{' '}
-          {selectedSeats.map((seat) => seat.id).join(', ')}
+          <strong>Selected Seats:</strong> {seatIds}
         </div>
         <div className="summary-item">
           <strong>Number of Seats:</strong> {selectedSeats.length}
@@ -44,7 +50,7 @@ const BookingSummary = ({ onConfirm }: BookingSummaryProps) => {
         <div className="summary-actions" style={{ marginTop: '1rem' }}>
           <Button
             themeColor="primary"
-            disabled={selectedSeats.length === 0}
+            disabled={isDisabled}
             onClick={onConfirm}
             className="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base"
           >
@@ -56,4 +62,6 @@ const BookingSummary = ({ onConfirm }: BookingSummaryProps) => {
   );
 };
 
-export default BookingSummary;
+BookingSummary.displayName = 'BookingSummary';
+
+export default React.memo(BookingSummary);

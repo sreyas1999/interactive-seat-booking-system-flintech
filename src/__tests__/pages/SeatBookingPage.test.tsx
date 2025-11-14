@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { MemoryRouter, Routes, Route } from 'react-router-dom';
 import configureStore from 'redux-mock-store';
-import { SeatBookingPage } from '../pages/SeatBookingPage';
+import { SeatBookingPage } from '../../pages/SeatBookingPage';
 
 // Mock d3-seating-chart to avoid DOM SVG methods (like getBBox) during tests
 jest.mock('d3-seating-chart', () => ({

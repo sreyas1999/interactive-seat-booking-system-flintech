@@ -1,4 +1,6 @@
+import React from 'react';
 import { SEAT_PRICES } from '../../utils/constants';
+import '../../styles/PriceLegend.css';
 
 const PriceLegend = () => {
   return (
@@ -20,4 +22,6 @@ const PriceLegend = () => {
   );
 };
 
-export default PriceLegend;
+PriceLegend.displayName = 'PriceLegend';
+
+export default React.memo(PriceLegend);

@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
 import configureStore from 'redux-mock-store';
-import { MovieListPage } from '../pages/MovieListPage';
+import { MovieListPage } from '../../pages/MovieListPage';
 
 const mockStore = configureStore([]);
 

@@ -1,4 +1,4 @@
-import type { FC } from 'react';
+import { memo, useCallback, type FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 import type { Movie } from '../../types/movie';
 
@@ -6,18 +6,25 @@ interface MovieCardProps {
   movie: Movie;
 }
 
-const MovieCard: FC<MovieCardProps> = ({ movie }) => {
+const MovieCard: FC<MovieCardProps> = memo(({ movie }) => {
   const navigate = useNavigate();
 
-  const handleViewDetails = () => {
+  const handleViewDetails = useCallback(() => {
     navigate(`/movie/${movie.id}`);
-  };
+  }, [navigate, movie.id]);
+
+  const handleButtonClick = useCallback((e: React.MouseEvent) => {
+    e.stopPropagation();
+    handleViewDetails();
+  }, [handleViewDetails]);
+
+  const isComingSoon = movie.status === 'coming_soon';
 
   return (
     <div
       className="movie-card"
-      onClick={movie.status !== 'coming_soon' ? handleViewDetails : undefined}
-      style={movie.status === 'coming_soon' ? { cursor: 'default', pointerEvents: 'none', opacity: 0.85 } : {}}
+      onClick={!isComingSoon ? handleViewDetails : undefined}
+      style={isComingSoon ? { cursor: 'default', pointerEvents: 'none', opacity: 0.85 } : {}}
     >
       <div className="movie-poster">
         <img
@@ -25,7 +32,7 @@ const MovieCard: FC<MovieCardProps> = ({ movie }) => {
           alt={movie.title}
           loading="lazy"
         />
-        {movie.status !== 'coming_soon' && (
+        {!isComingSoon && (
           <div className="movie-rating">
             <span className="rating-icon">⭐</span>
             <span className="rating-value">{movie.rating}/10</span>
@@ -36,12 +43,9 @@ const MovieCard: FC<MovieCardProps> = ({ movie }) => {
         <h3 className="movie-title">{movie.title}</h3>
         <p className="movie-genre">{movie.genre}</p>
         
-        {movie.status !== 'coming_soon' && (
+        {!isComingSoon && (
           <button
-            onClick={(e: React.MouseEvent) => {
-              e.stopPropagation();
-              handleViewDetails();
-            }}
+            onClick={handleButtonClick}
             className="book-button"
           >
             Book tickets
@@ -50,6 +54,8 @@ const MovieCard: FC<MovieCardProps> = ({ movie }) => {
       </div>
     </div>
   );
-};
+});
+
+MovieCard.displayName = 'MovieCard';
 
 export default MovieCard;

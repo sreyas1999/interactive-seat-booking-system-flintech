@@ -1,33 +1,44 @@
-import { useEffect } from "react";
+import { useEffect, useMemo, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
-import type { RootState } from "../redux/store";
+import { useAppSelector } from "../redux/hooks";
 import { Button } from "@progress/kendo-react-buttons";
 import { calculateTotalPrice } from "../utils/seatUtils";
 
 export const ConfirmationPage = () => {
   const navigate = useNavigate();
-  const { currentBooking: booking, selectedSeats } = useSelector(
-    (state: RootState) => state.booking
+  const { currentBooking: booking, selectedSeats } = useAppSelector(
+    (state) => state.booking
   );
-  const movie = useSelector((state: RootState) => state.movies.selectedMovie);
-  const theatre = useSelector((state: RootState) => state.theatres.selectedTheatre);
+  const movie = useAppSelector((state) => state.movies.selectedMovie);
+  const theatre = useAppSelector((state) => state.theatres.selectedTheatre);
 
   useEffect(() => {
     if (!booking || !movie || !theatre) navigate("/");
   }, [booking, movie, theatre, navigate]);
 
-  if (!booking || !movie || !theatre) return null;
+  const handleBookAnother = useCallback(() => {
+    navigate("/");
+  }, [navigate]);
 
-  const totalAmount = calculateTotalPrice(selectedSeats);
+  const totalAmount = useMemo(
+    () => calculateTotalPrice(selectedSeats),
+    [selectedSeats]
+  );
 
-  const bookingDetails = [
-    { label: "Movie", value: movie.title },
-    { label: "Theatre", value: theatre.name },
-    { label: "Show Time", value: booking.showTime },
-    { label: "Seats", value: selectedSeats.map((s) => s.id).join(", ") },
+  const seatIds = useMemo(
+    () => selectedSeats.map((s) => s.id).join(", "),
+    [selectedSeats]
+  );
+
+  const bookingDetails = useMemo(() => [
+    { label: "Movie", value: movie?.title || '' },
+    { label: "Theatre", value: theatre?.name || '' },
+    { label: "Show Time", value: booking?.showTime || '' },
+    { label: "Seats", value: seatIds },
     { label: "Total Amount", value: `₹${totalAmount}` },
-  ];
+  ], [movie?.title, theatre?.name, booking?.showTime, seatIds, totalAmount]);
+
+  if (!booking || !movie || !theatre) return null;
 
   return (
     <div className="confirmation-container">
@@ -50,7 +61,7 @@ export const ConfirmationPage = () => {
         </section>
 
         <footer className="confirmation-actions">
-          <Button themeColor="primary" onClick={() => navigate("/")}>
+          <Button themeColor="primary" onClick={handleBookAnother}>
             Book Another Movie
           </Button>
         </footer>

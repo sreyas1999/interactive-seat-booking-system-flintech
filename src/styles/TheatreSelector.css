@@ -1,0 +1,51 @@
+.theatre-selector {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.theatre-selector select {
+  width: 100%;
+  max-width: 320px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1.5px solid #ff6358;
+  font-weight: 600;
+  font-size: 1.08rem;
+  background: #fff;
+  color: #222;
+  cursor: pointer;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  outline: none;
+}
+
+.theatre-selector select:hover {
+  border-color: #ff4338;
+}
+
+.theatre-selector select:focus {
+  border-color: #ff6358;
+  box-shadow: 0 0 0 3px rgba(255, 99, 88, 0.1);
+}
+
+.theatre-selector select:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .theatre-selector select {
+    max-width: 280px;
+    font-size: 1rem;
+    padding: 7px 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .theatre-selector select {
+    max-width: 100%;
+    font-size: 0.95rem;
+    padding: 6px 10px;
+  }
+}

@@ -2,25 +2,100 @@
 .seat-booking-main {
   display: flex;
   justify-content: center;
+  position: relative;
+  overflow-x: auto;
+  max-width: 1080px;
+  min-height: 420px; /* Reduced since stage is now separate */
+  flex-direction: row;
+  gap: 20px; /* Added gap between components */
+  align-items: flex-start;
+  padding: 8px 0;
+  margin: 0 auto;
 }
-.seat-booking-main > div:first-child {
-  max-width: 520px;
-  width: 100%;
+
+.seat-grid-container {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
 }
-.seat-legend-responsive {
-  transition: margin 0.2s;
+
+.booking-header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+.back-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--primary-color);
+  padding: 0 8px 0 0;
+  margin-left: 32px;
+}
+.seat-booking-actions > button {
+  border-radius: 18px;
+  font-weight: 800;
+  font-size: 1.12rem;
+  padding: 10px 38px;
+  background: linear-gradient(90deg, #ff6358 0%, #fdce3e 100%);
+  color: #fff;
+  box-shadow: 0 2px 12px rgba(255, 99, 88, 0.18);
+  border: none;
+  transition: box-shadow 0.2s;
+}
+.pricing-section {
+  width: 100%;
+  max-width: 520px;
+  margin: 18px auto 0 auto;
+  background: #f7f7fa;
+  border-radius: 10px;
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.07);
+  padding: 18px 22px;
+  font-size: 1.08rem;
+  color: #222;
+  font-weight: 500;
+  text-align: center;
+}
+.limit-message {
+  margin-top: 18px;
+  color: #d32f2f;
+  font-weight: 700;
+  font-size: 1.08rem;
+  background: rgba(255, 255, 255, 0.98);
+  padding: 10px 18px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(211, 47, 47, 0.1);
+  border: 1.5px solid #d32f2f;
+  text-align: center;
+  display: block;
+}
+.seat-number {
+  font-size: 12px;
+  font-weight: bold;
+  text-anchor: middle;
+  fill: #333;
+  user-select: none;
+  pointer-events: none;
 }
 @media (max-width: 700px) {
   .seat-booking-main {
     flex-direction: column !important;
     align-items: center !important;
+    gap: 20px !important;
     min-height: 500px !important;
     overflow-x: auto !important;
     width: 100vw !important;
     max-width: 100vw !important;
   }
+
   .seat-booking-main svg {
     height: 500px !important;
     min-height: 500px !important;
@@ -29,13 +104,8 @@
     width: auto !important;
     display: block;
   }
-  .seat-legend-responsive {
-    margin-left: 0 !important;
-    margin-top: 18px !important;
-    width: 100%;
-    max-width: 320px;
-  }
 }
+
 @media (max-width: 730px) {
   .seat-booking-main {
     flex-direction: column !important;

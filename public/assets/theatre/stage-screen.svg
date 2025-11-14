@@ -1,0 +1,53 @@
+<svg width="500" height="80" viewBox="0 0 500 80" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="screenGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1976d2;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2196f3;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="lightProjection" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#bbdefb;stop-opacity:0.8" />
+      <stop offset="60%" style="stop-color:#90caf9;stop-opacity:0.4" />
+      <stop offset="100%" style="stop-color:#ffffff;stop-opacity:0" />
+    </linearGradient>
+    
+    <filter id="screenGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge> 
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Screen with curved edges -->
+  <path 
+    d="M 50 20 Q 50 15 55 15 L 445 15 Q 450 15 450 20 L 450 27 Q 450 32 445 32 L 55 32 Q 50 32 50 27 Z" 
+    fill="url(#screenGradient)" 
+    filter="url(#screenGlow)"
+    data-stage="true"
+  />
+  
+  <!-- Screen text -->
+  <text 
+    x="250" 
+    y="26" 
+    text-anchor="middle" 
+    font-size="14" 
+    font-weight="bold" 
+    fill="#ffffff" 
+    letter-spacing="3"
+  >
+    SCREEN
+  </text>
+  
+  <!-- Light projection effect -->
+  <rect 
+    x="50" 
+    y="32" 
+    width="400" 
+    height="40" 
+    fill="url(#lightProjection)" 
+    opacity="0.6"
+  />
+</svg>

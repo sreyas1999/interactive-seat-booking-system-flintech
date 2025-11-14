@@ -1,3 +1,4 @@
+import React, { useCallback, useMemo } from 'react';
 import type { Seat as SeatType } from '../../types/seat';
 import { Tooltip } from '@progress/kendo-react-tooltip';
 
@@ -7,27 +8,45 @@ interface SeatProps {
 }
 
 const Seat = ({ seat, onSelect }: SeatProps) => {
-  const handleClick = () => {
+  const handleClick = useCallback(() => {
     if (!seat.isBooked) {
       onSelect(seat);
     }
-  };
+  }, [seat, onSelect]);
 
-  const getSeatClass = () => {
+  const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
+    if ((e.key === 'Enter' || e.key === ' ') && !seat.isBooked) {
+      e.preventDefault();
+      onSelect(seat);
+    }
+  }, [seat, onSelect]);
+
+  const seatClass = useMemo(() => {
     const classes = ['seat', seat.tier.toLowerCase()];
     if (seat.isSelected) classes.push('selected');
     if (seat.isBooked) classes.push('booked');
     return classes.join(' ');
-  };
+  }, [seat.tier, seat.isSelected, seat.isBooked]);
+
+  const tooltipContent = useMemo(
+    () => `₹${seat.price} - ${seat.tier}`,
+    [seat.price, seat.tier]
+  );
+
+  const ariaLabel = useMemo(
+    () => `Seat ${seat.id} - ${seat.tier} - ₹${seat.price}`,
+    [seat.id, seat.tier, seat.price]
+  );
 
   return (
-    <Tooltip content={`₹${seat.price} - ${seat.tier}`}>
+    <Tooltip content={tooltipContent}>
       <div
-        className={getSeatClass()}
+        className={seatClass}
         onClick={handleClick}
+        onKeyDown={handleKeyDown}
         role="button"
         tabIndex={0}
-        aria-label={`Seat ${seat.id} - ${seat.tier} - ₹${seat.price}`}
+        aria-label={ariaLabel}
         aria-disabled={seat.isBooked}
       >
         {seat.number}
@@ -36,4 +55,6 @@ const Seat = ({ seat, onSelect }: SeatProps) => {
   );
 };
 
-export default Seat;
+Seat.displayName = 'Seat';
+
+export default React.memo(Seat);

@@ -1,6 +1,5 @@
-import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import type { RootState } from '../../redux/store';
+import React, { useCallback, useMemo } from 'react';
+import { useAppSelector, useAppDispatch } from '../../redux/hooks';
 import { toggleSeatSelection } from '../../redux/slices/bookingSlice';
 import Seat from './Seat';
 import type { SeatRow, Seat as SeatType } from '../../types/seat';
@@ -13,13 +12,18 @@ interface SeatGridProps {
 }
 
 const SeatGrid: React.FC<SeatGridProps> = ({ theatre }) => {
-  const dispatch = useDispatch();
-  const selectedSeats = useSelector((state: RootState) => state.booking.selectedSeats);
-  const error = useSelector((state: RootState) => state.booking.error);
+  const dispatch = useAppDispatch();
+  const selectedSeats = useAppSelector((state) => state.booking.selectedSeats);
+  const error = useAppSelector((state) => state.booking.error);
 
-  const handleSeatSelect = (seat: SeatType) => {
+  const handleSeatSelect = useCallback((seat: SeatType) => {
     dispatch(toggleSeatSelection(seat));
-  };
+  }, [dispatch]);
+
+  const selectedSeatIds = useMemo(() => 
+    new Set(selectedSeats.map((s: SeatType) => s.id)), 
+    [selectedSeats]
+  );
 
   if (!theatre) {
     return <div>Please select a theatre first</div>;
@@ -36,7 +40,7 @@ const SeatGrid: React.FC<SeatGridProps> = ({ theatre }) => {
                 key={seat.id}
                 seat={{
                   ...seat,
-                  isSelected: selectedSeats.some((s: SeatType) => s.id === seat.id),
+                  isSelected: selectedSeatIds.has(seat.id),
                 }}
                 onSelect={handleSeatSelect}
               />
@@ -56,6 +60,6 @@ const SeatGrid: React.FC<SeatGridProps> = ({ theatre }) => {
   );
 };
 
+SeatGrid.displayName = 'SeatGrid';
 
-
-export default SeatGrid;
+export default React.memo(SeatGrid);

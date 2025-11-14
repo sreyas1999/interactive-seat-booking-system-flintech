@@ -1,8 +1,16 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import '../../styles/Navbar.css';
+import '../../styles/ProfileMenu.css';
 import { useNavigate } from 'react-router-dom';
 import { AppBar, AppBarSection } from '@progress/kendo-react-layout';
 import { createPortal } from 'react-dom';
+
+// Extract menu width calculation to avoid repetition
+const getMenuWidth = (): number => {
+  if (window.innerWidth <= 320) return 140;
+  if (window.innerWidth <= 480) return 160;
+  return 180;
+};
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -10,36 +18,57 @@ const Navbar = () => {
   const profileRef = useRef<HTMLDivElement>(null);
   const [menuPosition, setMenuPosition] = useState<{top: number, left: number} | null>(null);
 
-  const handleProfileClick = () => {
+  const calculateMenuPosition = useCallback(() => {
     if (profileRef.current) {
       const rect = profileRef.current.getBoundingClientRect();
+      const menuWidth = getMenuWidth();
+      
       setMenuPosition({
-        top: rect.bottom + window.scrollY,
-        left: rect.right - 180 + window.scrollX // 180px is menu width
+        top: rect.bottom + window.scrollY + 4,
+        left: rect.right - menuWidth + window.scrollX
       });
     }
-    setMenuOpen((open) => !open);
-  };
+  }, []);
 
-  const handleSignOut = () => {
+  const handleProfileClick = useCallback(() => {
+    calculateMenuPosition();
+    setMenuOpen((open) => !open);
+  }, [calculateMenuPosition]);
+
+  const handleSignOut = useCallback(() => {
     setMenuOpen(false);
     navigate('/');
-  };
+  }, [navigate]);
 
-  // Close menu on click outside
+  const handleNavigation = useCallback((path: string) => {
+    setMenuOpen(false);
+    navigate(path);
+  }, [navigate]);
+
+  // Close menu on click outside and handle window resize
   useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
+    const handleClickOutside = (event: MouseEvent) => {
       if (profileRef.current && !profileRef.current.contains(event.target as Node)) {
         setMenuOpen(false);
       }
-    }
+    };
+
+    const handleResize = () => {
+      if (menuOpen) {
+        calculateMenuPosition();
+      }
+    };
+
     if (menuOpen) {
       document.addEventListener('mousedown', handleClickOutside);
+      window.addEventListener('resize', handleResize);
     }
+    
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
+      window.removeEventListener('resize', handleResize);
     };
-  }, [menuOpen]);
+  }, [menuOpen, calculateMenuPosition]);
 
   return (
     <AppBar className="custom-navbar">
@@ -70,16 +99,16 @@ const Navbar = () => {
           <div
             className="profile-menu"
             style={{
-              position: 'absolute',
-              top: menuPosition.top,
-              left: menuPosition.left,
+              position: 'fixed',
+              top: `${menuPosition.top}px`,
+              left: `${menuPosition.left}px`,
               zIndex: 100002
             }}
           >
-            <div className="profile-menu-item" onClick={() => { setMenuOpen(false); navigate('/profile'); }}>
+            <div className="profile-menu-item" onClick={() => handleNavigation('/profile')}>
               My Profile
             </div>
-            <div className="profile-menu-item" onClick={() => { setMenuOpen(false); navigate('/settings'); }}>
+            <div className="profile-menu-item" onClick={() => handleNavigation('/settings')}>
               Settings
             </div>
             <div className="profile-menu-divider" />

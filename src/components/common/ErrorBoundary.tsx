@@ -28,6 +28,10 @@ export class ErrorBoundary extends Component<Props, State> {
     console.error('Uncaught error:', error, errorInfo);
   }
 
+  private handleReset = () => {
+    this.setState({ hasError: false, error: null });
+  };
+
   public render() {
     if (this.state.hasError) {
       return (
@@ -37,7 +41,7 @@ export class ErrorBoundary extends Component<Props, State> {
             <p>{this.state.error?.message || 'An unexpected error occurred'}</p>
             <button
               className="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base"
-              onClick={() => this.setState({ hasError: false, error: null })}
+              onClick={this.handleReset}
             >
               Try again
             </button>

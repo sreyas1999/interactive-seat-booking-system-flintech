@@ -1,0 +1,31 @@
+.price-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.seat-sample {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.seat-sample.silver {
+  background-color: #C0C0C0;
+}
+
+.seat-sample.gold {
+  background-color: #FFD700;
+}
+
+.seat-sample.platinum {
+  background-color: #E5E4E2;
+}

@@ -1,11 +1,9 @@
 import '@testing-library/jest-dom';
-
-// Polyfill for TextEncoder/TextDecoder in Jest (Node.js)
 import { TextEncoder, TextDecoder } from 'util';
-// @ts-ignore
-global.TextEncoder = TextEncoder;
-// @ts-ignore
-global.TextDecoder = TextDecoder;
+
+(global as unknown as Record<string, unknown>).TextEncoder = TextEncoder;
+(global as unknown as Record<string, unknown>).TextDecoder = TextDecoder;
+
 // Silence React SVG attribute warnings in tests
 const suppressedErrors = [
 	'Invalid DOM property `stop-color`. Did you mean `stopColor`?',

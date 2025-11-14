@@ -31,19 +31,6 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-.screen {
-  width: 90%;
-  max-width: 400px;
-  height: 30px;
-  margin: 0 auto 1.5rem;
-  background: #ddd;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 4px;
-  font-size: 0.875rem;
-}
-
 .seat-row {
   display: flex;
   gap: 0.5rem;
@@ -124,11 +111,6 @@
 
   .seats {
     gap: 0.5rem;
-  }
-
-  .screen {
-    height: 40px;
-    font-size: 1rem;
   }
 
   .summary-item {

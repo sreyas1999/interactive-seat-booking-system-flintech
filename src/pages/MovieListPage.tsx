@@ -1,21 +1,38 @@
-import { useState } from "react";
-import { useSelector } from "react-redux";
-import type { RootState } from "../redux/store";
+import { useState, useMemo, useCallback } from "react";
+import { useAppSelector } from "../redux/hooks";
 import MovieCard from "../components/movies/MovieCard";
+import Loader from "../components/common/Loader";
 import "../styles/MovieList.css";
 
 export const MovieListPage = () => {
-  const movies = useSelector((state: RootState) => state.movies.movies);
+  const movies = useAppSelector((state) => state.movies.movies);
+  const loading = useAppSelector((state) => state.movies.loading);
   const [activeFilter, setActiveFilter] = useState<
     "now_showing" | "coming_soon"
   >("now_showing");
 
-  const nowShowingMovies = movies.filter(
-    (movie) => movie.status === "now_showing"
+  const nowShowingMovies = useMemo(
+    () => movies.filter((movie) => movie.status === "now_showing"),
+    [movies]
   );
-  const upcomingMovies = movies.filter(
-    (movie) => movie.status === "coming_soon"
+
+  const upcomingMovies = useMemo(
+    () => movies.filter((movie) => movie.status === "coming_soon"),
+    [movies]
   );
+
+  const similarMovies = useMemo(
+    () => nowShowingMovies.slice(0, Math.min(4, nowShowingMovies.length)),
+    [nowShowingMovies]
+  );
+
+  const handleFilterClick = useCallback((filter: "now_showing" | "coming_soon") => {
+    setActiveFilter(filter);
+  }, []);
+
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
     <div className="movie-list-page">
@@ -34,7 +51,7 @@ export const MovieListPage = () => {
               className={`filter-item ${
                 activeFilter === "now_showing" ? "active" : ""
               }`}
-              onClick={() => setActiveFilter("now_showing")}
+              onClick={() => handleFilterClick("now_showing")}
             >
               Now Showing
             </div>
@@ -42,7 +59,7 @@ export const MovieListPage = () => {
               className={`filter-item ${
                 activeFilter === "coming_soon" ? "active" : ""
               }`}
-              onClick={() => setActiveFilter("coming_soon")}
+              onClick={() => handleFilterClick("coming_soon")}
             >
               Coming Soon
             </div>
@@ -80,11 +97,9 @@ export const MovieListPage = () => {
                   <h2>More Like This</h2>
                 </div>
                 <div className="movie-grid">
-                  {nowShowingMovies
-                    .slice(0, Math.min(4, nowShowingMovies.length))
-                    .map((movie) => (
-                      <MovieCard key={`similar-${movie.id}`} movie={movie} />
-                    ))}
+                  {similarMovies.map((movie) => (
+                    <MovieCard key={`similar-${movie.id}`} movie={movie} />
+                  ))}
                 </div>
               </div>
             )}

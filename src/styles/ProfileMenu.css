@@ -14,7 +14,7 @@
   position: absolute;
   top: 110%;
   right: 0;
-  min-width: 180px;
+  width: 180px;
   background: #fff;
   color: #333;
   border-radius: 12px;
@@ -25,7 +25,48 @@
   flex-direction: column;
   animation: fadeInMenu 0.2s ease;
   margin-right: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-sizing: border-box;
+  overflow: hidden; 
 }
+
+.profile-menu-item {
+  padding: 12px 16px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border: none;
+  background: none;
+  text-align: left;
+  width: 100%;
+  color: #333;
+  white-space: nowrap; 
+  overflow: hidden; 
+  text-overflow: ellipsis;
+  box-sizing: border-box; 
+}
+
+.profile-menu-item:hover {
+  background-color: #f5f5f5;
+}
+
+.profile-menu-item.signout {
+  color: #df1f26;
+  font-weight: 600;
+}
+
+.profile-menu-item.signout:hover {
+  background-color: #fef2f2;
+  color: #b91c1c;
+}
+
+.profile-menu-divider {
+  height: 1px;
+  background-color: #e5e5e5;
+  margin: 4px 0;
+}
+
 @keyframes fadeInMenu {
   from {
     opacity: 0;
@@ -34,5 +75,30 @@
   to {
     opacity: 1;
     transform: none;
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .profile-menu {
+    width: 160px;
+    margin-right: 10px;
+  }
+  
+  .profile-menu-item {
+    padding: 10px 14px;
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 320px) {
+  .profile-menu {
+    width: 140px;
+    margin-right: 5px;
+  }
+  
+  .profile-menu-item {
+    padding: 8px 12px;
+    font-size: 0.8rem;
   }
 }
